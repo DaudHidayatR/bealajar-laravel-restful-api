@@ -13,6 +13,11 @@ class User extends Model
     protected $keyType = "int";
     public $incrementing = true;
     public $timestamps = true;
+    protected $fillable = [
+        "username",
+        "password",
+        "name",
+    ];
 
     public function contact():HasMany
     {
