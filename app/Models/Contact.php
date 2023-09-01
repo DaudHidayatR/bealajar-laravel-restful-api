@@ -19,6 +19,10 @@ class Contact extends Model
     {
         return $this->belongsTo(User::class, "user_id", "id");
     }
+    public function addresses():HasMany
+    {
+        return $this->hasMany(Address::class, "contact_id", "id");
+    }
 
 
 }
