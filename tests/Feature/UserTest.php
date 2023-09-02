@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -67,5 +69,64 @@ class UserTest extends TestCase
                 ],
             ]);
     }
+    public function testLoginSuccess()
+    {
+        $this->seed(UserSeeder::class);
+        $this->post('/api/users/login', [
+            'username' => 'SagAsh',
+            'password' => 'Daud123',
+            'name' => 'Daud Hidayat Ramadhan',
+        ])
+            ->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    'username' => 'SagAsh',
+                    'name' => 'Daud Hidayat Ramadhan',
 
+                ],
+            ]);
+        $user = User::where('username', 'SagAsh')->first();
+        self::assertNotNull($user->token);
+
+
+    }
+    public function testLoginFailedUsernameNotFound()
+    {
+        $this->seed(UserSeeder::class);
+        $this->post('/api/users/login', [
+            'username' => 'salah',
+            'password' => 'Daud1234',
+            'name' => 'Daud Hidayat Ramadhan',
+        ])
+            ->assertStatus(401)
+            ->assertJson([
+                "errors" => [
+                    "message" => [
+                        "Username or password is wrong"
+                    ]
+                ]
+            ]);
+        $user = User::where('username', 'SagAsh')->first();
+        self::assertNull($user->token);
+    }
+    public function testLoginFailedPasswordIsWrong()
+    {
+        $this->seed(UserSeeder::class);
+        $this->post('/api/users/login', [
+            'username' => 'SagAsh',
+            'password' => 'salah',
+            'name' => 'Daud Hidayat Ramadhan',
+        ])
+            ->assertStatus(401)
+            ->assertJson([
+                "errors" => [
+                    "message" => [
+                        "Username or password is wrong"
+                    ]
+                ]
+            ]);
+        $user = User::where('username', 'SagAsh')->first();
+        self::assertNull($user->token);
+    }
 }
+
