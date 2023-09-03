@@ -65,11 +65,11 @@ class ContactTest extends TestCase
             'last_name' => 'ramadhan',
             'email' => 'daud28ramadhan',
             'phone' => '081234567890',
-        ])->assertStatus(400)
+        ])->assertStatus(401)
             ->assertJson([
                 'errors' => [
                     'message' => [
-                        'Unauthenticated.'
+                        'Unauthorized'
                     ]
                 ]
             ]);
@@ -127,6 +127,51 @@ class ContactTest extends TestCase
                 'errors' => [
                     'message' => [
                         'Contact not found'
+                    ]
+                ]
+            ]);
+    }
+    public function testUpdateSuccess()
+    {
+        $this->seed([UserSeeder::class, ContactSeeder::class]);
+        $contact = Contact::first();
+
+        $this->put('/api/contacts/'.$contact->id, [
+            'first_name' => 'Daud',
+            'last_name' => 'Ramadhan',
+            'email' => 'baru28@gmail.com',
+            'phone' => '12233455'
+        ],
+            [
+            'Authorization' => 'test'
+        ])->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    'first_name' => 'Daud',
+                    'last_name' => 'Ramadhan',
+                    'email' => 'baru28@gmail.com',
+                    'phone' => '12233455'
+                ]
+            ]);
+    }
+    public function testUpdateFailed()
+    {
+        $this->seed([UserSeeder::class, ContactSeeder::class]);
+        $contact = Contact::first();
+
+        $this->put('/api/contacts/'.$contact->id, [
+            'first_name' => '',
+            'last_name' => 'Ramadhan',
+            'email' => 'baru28@gmail.com',
+            'phone' => '12233455'
+        ],
+            [
+                'Authorization' => 'test'
+            ])->assertStatus(400)
+            ->assertJson([
+                'errors' => [
+                    'first_name' => [
+                        "The first name field is required."
                     ]
                 ]
             ]);
