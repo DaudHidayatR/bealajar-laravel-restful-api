@@ -13,6 +13,14 @@ class Address extends Model
     protected $keyType = 'int';
     public $incrementing = true;
     public $timestamps = true;
+    protected $fillable = [
+        'street',
+        'state',
+        'city',
+        'country',
+        'postal_code',
+        'contact_id',
+    ];
 
     public function contact(): BelongsTo
     {
