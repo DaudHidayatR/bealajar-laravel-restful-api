@@ -1,0 +1,134 @@
+### Register User API
+
+POST http://localhost:8000/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "daud",
+    "password": "Daud123",
+    "name": "Daud Hidayat Ramadhan"
+}
+
+### Login User API
+POST http://localhost:8000/api/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "Daud",
+    "password": "Daud123"
+}
+
+### Get Current User API
+GET http://localhost:8000/api/users/current
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+### Update Current User API
+PATCH http://localhost:8000/api/users/current
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+{
+  "name": "Daud Hidayat R"
+}
+
+
+### Logout User API
+DELETE http://localhost:8000/api/users/logout
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+### Create User API
+POST http://localhost:8000/api/contacts
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+{
+    "first_name": "siraj",
+    "last_name": "Hidayat",
+    "email": "daud28ramadhan@gmail.com",
+    "phone": "08123456789"
+}
+
+### Get User API 1
+GET http://localhost:8000/api/contacts/1
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+### Update User API 1
+PUT http://localhost:8000/api/contacts/1
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+{
+    "first_name": "SagAsh",
+    "last_name": "Hidayat",
+    "email": "daud28ramadhan@gmail.com",
+    "phone": "08123456789"
+}
+
+### Delete Contact API 1
+DELETE http://localhost:8000/api/contacts/1
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+### Search Contact API
+GET http://localhost:8000/api/contacts?name=supri
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+### Create Address API
+POST http://localhost:8000/api/contacts/1/addresses
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+{
+    "street": "Candi Sumberadi2",
+    "city": "Sleman",
+    "state": "Yogyakarta",
+    "country": "Indonesia",
+    "postal_code": "15412"
+}
+
+### Get Address API 2
+GET http://localhost:8000/api/contacts/1/addresses/2
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+### Update Address API 1
+PUT http://localhost:8000/api/contacts/1/addresses/1
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+{
+    "street": "ubah",
+    "city": "Sleman",
+    "state": "Yogyakarta",
+    "country": "Indonesia",
+    "postal_code": "15412"
+}
+
+### Remove Address API 1
+DELETE http://localhost:8000/api/contacts/1/addresses/2
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
+
+### List Address API
+GET http://localhost:8000/api/contacts/1/addresses
+Content-Type: application/json
+Accept: application/json
+Authorization: 2c7f232d-5851-40df-9de0-be8af854cf85
